@@ -1,0 +1,64 @@
+# Construction-site safety monitor: default settings.
+# Override any key from the CLI, e.g. `cs-eval-lidar --set lidar.dbscan_eps=0.5`.
+
+ppe:
+  data: data/ppe/ppe.yaml
+  model: models/ppe/yolo11n.pt  # COCO-pretrained YOLO11 nano (auto-downloaded), fine-tuned on PPE
+  epochs: 40                 # ~2 min/epoch on the M5 GPU -> ~80 min
+  imgsz: 640
+  batch: 16
+  patience: 15               # early stopping on val mAP50-95
+  seed: 0
+  workers: 4
+  device: auto               # mps on Apple silicon, else cuda / cpu
+  run_name: yolo11n_ppe
+  weights: models/ppe/yolo11n_ppe.pt
+  conf: 0.35                 # confidence for the compliance demo (mAP uses the full PR curve)
+  iou: 0.5
+
+compliance:
+  # A PPE box belongs to the person whose box covers most of it.
+  min_cover: 0.6             # fraction of the PPE box inside the person box
+  head_band: 0.45            # hard hat must sit in the top 45 % of the person box
+  torso_band: [0.15, 0.85]   # vest centre must lie in this vertical band
+
+lidar:
+  data: data/av2
+  range_m: 25.0              # keep points within this radius of the sensor
+  z_min: -3.0                # ego-frame height window (metres, ground ~ 0)
+  z_max: 3.0
+  voxel: 0.1                 # voxel-grid downsampling size (metres)
+  ground:
+    method: ransac           # ransac (lowest-point seeds) | ransac_naive | open3d
+    seed_cell: 1.0           # grid cell (m) for the lowest-point RANSAC seeds
+    threshold: 0.15          # inlier distance to the plane (metres)
+    iterations: 200
+    max_tilt_deg: 15         # reject planes steeper than this (walls, cars)
+    keep_above: 0.15         # drop points within this height of the plane
+    max_height: 2.5          # and everything higher than this (canopies, awnings)
+  cluster:
+    eps: 0.3                 # DBSCAN radius (m); chosen on the tune logs, see reports/lidar/ablations_tune.md
+    min_points: 8
+    max_points: 4000
+  person_rule:               # hand-tuned baseline classifier
+    height: [1.0, 2.1]
+    max_footprint: 1.3
+    min_points: 8
+  classifier: models/lidar/cluster_gbt.joblib
+
+zones:
+  # Danger zones in the machine (sensor-platform) frame: x forward, y left, metres.
+  # Think of the LiDAR mounted on an excavator or dump truck: the red zone is the
+  # swing / blind-spot area, amber is a warning band.
+  machine_half_length: 2.5
+  machine_half_width: 1.0
+  machine_center_x: 1.4
+  red_margin: 3.0
+  amber_margin: 6.0
+  debounce_frames: 2         # a zone must be occupied for n consecutive frames to alert
+
+eval:
+  person_categories: [PEDESTRIAN, OFFICIAL_SIGNALER]
+  ignore_categories: [BICYCLIST, MOTORCYCLIST, WHEELCHAIR, WHEELED_RIDER, STROLLER, DOG]
+  min_interior_points: 5     # GT boxes with fewer LiDAR points are 'don't care'
+  match_dist_m: 1.0          # centre distance for a cluster to match a GT person
