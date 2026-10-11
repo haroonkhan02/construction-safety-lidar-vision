@@ -73,6 +73,8 @@ def run(cfg: dict, out_dir: Path, kind: str = "gbt", max_frames: int | None = No
             frames_small.append(cv2.cvtColor(small, cv2.COLOR_BGR2RGB))
     writer.release()
     cv2.imwrite(str(out_dir / "busiest_frame.png"), busiest)
+    Path("reports/lidar").mkdir(parents=True, exist_ok=True)
+    cv2.imwrite("reports/lidar/dashboard_frame.jpg", busiest, [cv2.IMWRITE_JPEG_QUALITY, 85])
     with open(out_dir / "alerts.jsonl", "w") as f:
         for e in events:
             f.write(json.dumps(e) + "\n")
