@@ -180,9 +180,20 @@ def evaluate(cfg: dict, role: str = "test", kinds=("rule", "gbt"), keep_scores=T
     return out
 
 
+def wilson(k: int, n: int, z: float = 1.96) -> list[float]:
+    """95 % Wilson score interval for a proportion k / n (sane for tiny n and k = n)."""
+    if n == 0:
+        return [0.0, 1.0]
+    p = k / n
+    centre = (p + z * z / (2 * n)) / (1 + z * z / n)
+    half = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
+    return [round(float(centre - half), 3), round(float(centre + half), 3)]
+
+
 def alert_metrics(c: dict) -> dict:
     tp, fp, fn, tn = (int(c.get(k, 0)) for k in ("tp", "fp", "fn", "tn"))
-    return {**prf(tp, fp, fn), "tn": tn, "frames_occupied": tp + fn}
+    return {**prf(tp, fp, fn), "tn": tn, "frames_occupied": tp + fn,
+            "precision_ci95": wilson(tp, tp + fp), "recall_ci95": wilson(tp, tp + fn)}
 
 
 def main() -> None:
