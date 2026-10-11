@@ -128,6 +128,8 @@ def dashboard(bev_img: np.ndarray, cam_img: np.ndarray | None) -> np.ndarray:
 def draw_workers(img: np.ndarray, workers: list[Worker], dets: np.ndarray | None = None):
     """Green = compliant, red = violation (labelled), grey = unknown PPE status."""
     out = img.copy()
+    scale = max(out.shape[:2]) / 640  # keep labels readable on large images
+    thick = max(2, round(2 * scale))
     if dets is not None:
         for d in dets:
             if int(d[5]) != 5:  # PPE / other boxes: thin outline
@@ -141,7 +143,7 @@ def draw_workers(img: np.ndarray, workers: list[Worker], dets: np.ndarray | None
             color, text = GREEN, "OK"
         else:
             color, text = GREY, "PPE ?"
-        cv2.rectangle(out, (x0, y0), (x1, y1), color, 2)
-        cv2.putText(out, text, (x0, max(14, y0 - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2,
-                    cv2.LINE_AA)
+        cv2.rectangle(out, (x0, y0), (x1, y1), color, thick)
+        cv2.putText(out, text, (x0, max(int(20 * scale), y0 - 6)), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.75 * scale, color, thick, cv2.LINE_AA)
     return out
