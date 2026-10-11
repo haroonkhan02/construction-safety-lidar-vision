@@ -98,7 +98,8 @@ def evaluate(cfg: dict, role: str = "test", kinds=("rule", "gbt"), keep_scores=T
         log_gt = 0
         for p in av2.sweep_paths(root, lid, av2.eval_stride(root, lid)):
             boxes = ann.boxes(int(p.stem))
-            res = process_sweep(load_sweep(p), cfg)
+            # Passing the GBT here only makes the timing include classification.
+            res = process_sweep(load_sweep(p), cfg, clfs.get("gbt"))
             n_sweeps += 1
             for name, v in res.timings_ms.items():
                 timings[name].append(v)

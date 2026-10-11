@@ -11,6 +11,15 @@ from pathlib import Path
 from .config import load_config, pick_device
 
 
+def best_epoch(results_csv: Path) -> int:
+    """Epoch with the highest validation mAP@0.5:0.95 (the checkpoint Ultralytics keeps)."""
+    import pandas as pd
+
+    df = pd.read_csv(results_csv)
+    df.columns = [c.strip() for c in df.columns]
+    return int(df.loc[df["metrics/mAP50-95(B)"].idxmax(), "epoch"])
+
+
 def train(cfg: dict) -> Path:
     from ultralytics import YOLO
 
@@ -45,9 +54,9 @@ def train(cfg: dict) -> Path:
         "device": device,
         "epochs_requested": p["epochs"],
         "epochs_run": int(model.trainer.epoch) + 1,
-        "best_fitness_epoch": int(getattr(model.trainer, "best_epoch", -1)),
+        "best_epoch_by_val_map50_95": best_epoch(run_dir / "results.csv"),
         "minutes": round(minutes, 1),
-        "run_dir": str(run_dir),
+        "run_dir": str(run_dir.resolve().relative_to(Path.cwd())),
         "weights": str(out),
     }
     Path("reports/ppe").mkdir(parents=True, exist_ok=True)

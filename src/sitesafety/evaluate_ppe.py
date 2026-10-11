@@ -39,7 +39,7 @@ def detection_metrics(model, data_yaml: Path, device: str, name: str, out_dir: P
         "precision": round(float(m.box.mp), 4),
         "recall": round(float(m.box.mr), 4),
         "per_class": per_class,
-        "plots_dir": str(Path(m.save_dir)),
+        "plots_dir": str(Path(m.save_dir).resolve().relative_to(Path.cwd())),
     }
 
 
@@ -57,7 +57,8 @@ def compliance_eval(model, root: Path, cfg: dict, device: str) -> dict:
     stats = {"gt_workers": 0, "pred_workers": 0, "matched": 0,
              "status": {k: {"agree": 0, "known_pairs": 0} for k in RULE_ITEMS},
              "violation": {"tp": 0, "fp": 0, "fn": 0, "tn": 0},
-             "gt_orphan_no_ppe_boxes": 0, "gt_violation_workers": 0}
+             "gt_orphan_no_ppe_boxes": 0, "gt_violation_workers": 0,
+             "missed_violation_reasons": {}}
     examples = []
     for img_path in sorted((root / "test" / "images").glob("*.jpg")):
         img = cv2.imread(str(img_path))
@@ -89,6 +90,14 @@ def compliance_eval(model, root: Path, cfg: dict, device: str) -> dict:
             flagged = j in pm and pr_w[pm[j]].violation
             key = ("tp" if flagged else "fn") if g.violation else ("fp" if flagged else "tn")
             stats["violation"][key] += 1
+            if key == "fn":  # why was this violation missed?
+                if j not in pm:
+                    why = "worker_not_detected"
+                else:
+                    st = [pr_w[pm[j]].status[k] for k in g.violations]
+                    why = "status_unknown" if "unknown" in st else "status_yes"
+                stats["missed_violation_reasons"][why] = (
+                    stats["missed_violation_reasons"].get(why, 0) + 1)
         matched_pred = {i for i, _ in pairs}
         stats["violation"]["fp"] += sum(p.violation for i, p in enumerate(pr_w)
                                         if i not in matched_pred)
