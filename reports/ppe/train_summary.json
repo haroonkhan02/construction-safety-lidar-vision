@@ -1,0 +1,14 @@
+{
+  "model": "models/ppe/yolo11n.pt",
+  "device": "mps",
+  "epochs_requested": 40,
+  "epochs_run": 40,
+  "minutes": 59.3,
+  "run_dir": "models/ppe/runs/yolo11n_ppe",
+  "weights": "models/ppe/yolo11n_ppe.pt",
+  "best_epoch_by_val_map50_95": 40,
+  "best_val": {
+    "mAP50": 0.7718,
+    "mAP50_95": 0.4525
+  }
+}

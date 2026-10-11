@@ -1,0 +1,15 @@
+{
+  "tune_clusters": 28243,
+  "tune_person_clusters": 3016,
+  "tune_logs": [
+    "04994d08-156c-3018-9717-ba0e29be8153",
+    "51bbdd4d-3065-34ae-b369-b6e0444f34db",
+    "9f871fb4-3b8e-34b3-9161-ed961e71a6da",
+    "d46ff5df-95e8-32da-a0d7-87f7b976a959",
+    "dfc32963-1524-34f4-9f5e-0292f0f223ae",
+    "f1275002-842e-3571-8f7d-05816bc7cf56"
+  ],
+  "threshold": 0.85,
+  "oof_cluster_f1": 0.7899,
+  "path": "models/lidar/cluster_gbt.joblib"
+}

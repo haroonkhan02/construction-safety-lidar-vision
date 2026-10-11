@@ -1,0 +1,206 @@
+{
+  "role": "tune",
+  "sweeps": 192,
+  "rows": [
+    {
+      "ablation": "eps",
+      "value": 0.2,
+      "cluster_recall": 0.894,
+      "rule": {
+        "tp": 865,
+        "fp": 722,
+        "fn": 2712,
+        "precision": 0.5451,
+        "recall": 0.2418,
+        "f1": 0.335
+      },
+      "gbt_lolo": {
+        "tp": 2382,
+        "fp": 1049,
+        "fn": 1195,
+        "precision": 0.6943,
+        "recall": 0.6659,
+        "f1": 0.6798,
+        "threshold": 0.85
+      },
+      "ground_err_median_m": 0.069,
+      "ground_err_share_over_0.3m": 0.0,
+      "ms_per_sweep": 53.3
+    },
+    {
+      "ablation": "eps",
+      "value": 0.25,
+      "cluster_recall": 0.8689,
+      "rule": {
+        "tp": 1397,
+        "fp": 1230,
+        "fn": 2180,
+        "precision": 0.5318,
+        "recall": 0.3906,
+        "f1": 0.4504
+      },
+      "gbt_lolo": {
+        "tp": 2330,
+        "fp": 659,
+        "fn": 1247,
+        "precision": 0.7795,
+        "recall": 0.6514,
+        "f1": 0.7097,
+        "threshold": 0.85
+      },
+      "ground_err_median_m": 0.069,
+      "ground_err_share_over_0.3m": 0.0,
+      "ms_per_sweep": 50.5
+    },
+    {
+      "ablation": "eps",
+      "value": 0.3,
+      "cluster_recall": 0.8297,
+      "rule": {
+        "tp": 1538,
+        "fp": 1203,
+        "fn": 2039,
+        "precision": 0.5611,
+        "recall": 0.43,
+        "f1": 0.4869
+      },
+      "gbt_lolo": {
+        "tp": 2199,
+        "fp": 467,
+        "fn": 1378,
+        "precision": 0.8248,
+        "recall": 0.6148,
+        "f1": 0.7045,
+        "threshold": 0.85
+      },
+      "ground_err_median_m": 0.069,
+      "ground_err_share_over_0.3m": 0.0,
+      "ms_per_sweep": 50.7
+    },
+    {
+      "ablation": "eps",
+      "value": 0.4,
+      "cluster_recall": 0.7526,
+      "rule": {
+        "tp": 1479,
+        "fp": 973,
+        "fn": 2098,
+        "precision": 0.6032,
+        "recall": 0.4135,
+        "f1": 0.4906
+      },
+      "gbt_lolo": {
+        "tp": 1973,
+        "fp": 439,
+        "fn": 1604,
+        "precision": 0.818,
+        "recall": 0.5516,
+        "f1": 0.6589,
+        "threshold": 0.8
+      },
+      "ground_err_median_m": 0.069,
+      "ground_err_share_over_0.3m": 0.0,
+      "ms_per_sweep": 49.0
+    },
+    {
+      "ablation": "eps",
+      "value": 0.5,
+      "cluster_recall": 0.6626,
+      "rule": {
+        "tp": 1286,
+        "fp": 800,
+        "fn": 2291,
+        "precision": 0.6165,
+        "recall": 0.3595,
+        "f1": 0.4542
+      },
+      "gbt_lolo": {
+        "tp": 1771,
+        "fp": 465,
+        "fn": 1806,
+        "precision": 0.792,
+        "recall": 0.4951,
+        "f1": 0.6093,
+        "threshold": 0.7
+      },
+      "ground_err_median_m": 0.069,
+      "ground_err_share_over_0.3m": 0.0,
+      "ms_per_sweep": 49.0
+    },
+    {
+      "ablation": "eps",
+      "value": 0.7,
+      "cluster_recall": 0.5085,
+      "rule": {
+        "tp": 875,
+        "fp": 491,
+        "fn": 2702,
+        "precision": 0.6406,
+        "recall": 0.2446,
+        "f1": 0.354
+      },
+      "gbt_lolo": {
+        "tp": 1275,
+        "fp": 498,
+        "fn": 2302,
+        "precision": 0.7191,
+        "recall": 0.3564,
+        "f1": 0.4766,
+        "threshold": 0.5
+      },
+      "ground_err_median_m": 0.069,
+      "ground_err_share_over_0.3m": 0.0,
+      "ms_per_sweep": 53.1
+    },
+    {
+      "ablation": "ground",
+      "value": "ransac_naive",
+      "cluster_recall": 0.6047,
+      "rule": {
+        "tp": 998,
+        "fp": 1788,
+        "fn": 2579,
+        "precision": 0.3582,
+        "recall": 0.279,
+        "f1": 0.3137
+      },
+      "gbt_lolo": {
+        "tp": 1594,
+        "fp": 908,
+        "fn": 1983,
+        "precision": 0.6371,
+        "recall": 0.4456,
+        "f1": 0.5244,
+        "threshold": 0.65
+      },
+      "ground_err_median_m": 1.225,
+      "ground_err_share_over_0.3m": 0.5573,
+      "ms_per_sweep": 41.1
+    },
+    {
+      "ablation": "ground",
+      "value": "open3d",
+      "cluster_recall": 0.5368,
+      "rule": {
+        "tp": 939,
+        "fp": 1533,
+        "fn": 2638,
+        "precision": 0.3799,
+        "recall": 0.2625,
+        "f1": 0.3105
+      },
+      "gbt_lolo": {
+        "tp": 1414,
+        "fp": 810,
+        "fn": 2163,
+        "precision": 0.6358,
+        "recall": 0.3953,
+        "f1": 0.4875,
+        "threshold": 0.65
+      },
+      "ground_err_median_m": 1.29,
+      "ground_err_share_over_0.3m": 0.5938,
+      "ms_per_sweep": 27.4
+    }
+  ]
+}

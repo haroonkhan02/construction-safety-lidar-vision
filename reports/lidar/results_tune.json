@@ -1,0 +1,311 @@
+{
+  "role": "tune",
+  "logs": {
+    "04994d08-156c-3018-9717-ba0e29be8153": {
+      "sweeps": 32,
+      "gt_persons": 287
+    },
+    "51bbdd4d-3065-34ae-b369-b6e0444f34db": {
+      "sweeps": 32,
+      "gt_persons": 1258
+    },
+    "9f871fb4-3b8e-34b3-9161-ed961e71a6da": {
+      "sweeps": 32,
+      "gt_persons": 484
+    },
+    "d46ff5df-95e8-32da-a0d7-87f7b976a959": {
+      "sweeps": 32,
+      "gt_persons": 883
+    },
+    "dfc32963-1524-34f4-9f5e-0292f0f223ae": {
+      "sweeps": 32,
+      "gt_persons": 374
+    },
+    "f1275002-842e-3571-8f7d-05816bc7cf56": {
+      "sweeps": 32,
+      "gt_persons": 291
+    }
+  },
+  "sweeps": 192,
+  "gt_person_instances": 3577,
+  "config": {
+    "range_m": 25.0,
+    "voxel": 0.1,
+    "ground": {
+      "method": "ransac",
+      "seed_cell": 1.0,
+      "threshold": 0.15,
+      "iterations": 200,
+      "max_tilt_deg": 15,
+      "keep_above": 0.15,
+      "max_height": 2.5
+    },
+    "cluster": {
+      "eps": 0.3,
+      "min_points": 8,
+      "max_points": 4000
+    },
+    "match_dist_m": 1.0,
+    "min_interior_points": 5,
+    "zones": {
+      "machine_half_length": 2.5,
+      "machine_half_width": 1.0,
+      "machine_center_x": 1.4,
+      "red_margin": 3.0,
+      "amber_margin": 6.0,
+      "debounce_frames": 2
+    }
+  },
+  "cluster_recall": 0.8297,
+  "cluster_recall_by_range": {
+    "0-10m": 0.8265,
+    "10-20m": 0.8253,
+    "20-25m": 0.8439
+  },
+  "detection": {
+    "rule": {
+      "tp": 1538,
+      "fp": 1203,
+      "fn": 2039,
+      "precision": 0.5611,
+      "recall": 0.43,
+      "f1": 0.4869
+    },
+    "gbt": {
+      "tp": 2402,
+      "fp": 415,
+      "fn": 1175,
+      "precision": 0.8527,
+      "recall": 0.6715,
+      "f1": 0.7513
+    }
+  },
+  "detection_by_range": {
+    "rule": {
+      "0-10m": {
+        "tp": 198,
+        "fp": 76,
+        "fn": 390,
+        "precision": 0.7226,
+        "recall": 0.3367,
+        "f1": 0.4594
+      },
+      "10-20m": {
+        "tp": 977,
+        "fp": 737,
+        "fn": 1197,
+        "precision": 0.57,
+        "recall": 0.4494,
+        "f1": 0.5026
+      },
+      "20-25m": {
+        "tp": 363,
+        "fp": 390,
+        "fn": 452,
+        "precision": 0.4821,
+        "recall": 0.4454,
+        "f1": 0.463
+      }
+    },
+    "gbt": {
+      "0-10m": {
+        "tp": 438,
+        "fp": 85,
+        "fn": 155,
+        "precision": 0.8375,
+        "recall": 0.7386,
+        "f1": 0.7849
+      },
+      "10-20m": {
+        "tp": 1431,
+        "fp": 213,
+        "fn": 735,
+        "precision": 0.8704,
+        "recall": 0.6607,
+        "f1": 0.7512
+      },
+      "20-25m": {
+        "tp": 533,
+        "fp": 117,
+        "fn": 285,
+        "precision": 0.82,
+        "recall": 0.6516,
+        "f1": 0.7262
+      }
+    }
+  },
+  "alerts": {
+    "rule": {
+      "raw": {
+        "red": {
+          "tp": 3,
+          "fp": 4,
+          "fn": 29,
+          "precision": 0.4286,
+          "recall": 0.0938,
+          "f1": 0.1538,
+          "tn": 156,
+          "frames_occupied": 32,
+          "precision_ci95": [
+            0.158,
+            0.75
+          ],
+          "recall_ci95": [
+            0.032,
+            0.242
+          ]
+        },
+        "amber": {
+          "tp": 81,
+          "fp": 4,
+          "fn": 50,
+          "precision": 0.9529,
+          "recall": 0.6183,
+          "f1": 0.75,
+          "tn": 57,
+          "frames_occupied": 131,
+          "precision_ci95": [
+            0.885,
+            0.982
+          ],
+          "recall_ci95": [
+            0.533,
+            0.697
+          ]
+        }
+      },
+      "debounced": {
+        "red": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 31,
+          "precision": 1.0,
+          "recall": 0.0312,
+          "f1": 0.0606,
+          "tn": 160,
+          "frames_occupied": 32,
+          "precision_ci95": [
+            0.207,
+            1.0
+          ],
+          "recall_ci95": [
+            0.006,
+            0.157
+          ]
+        },
+        "amber": {
+          "tp": 53,
+          "fp": 2,
+          "fn": 78,
+          "precision": 0.9636,
+          "recall": 0.4046,
+          "f1": 0.5699,
+          "tn": 59,
+          "frames_occupied": 131,
+          "precision_ci95": [
+            0.877,
+            0.99
+          ],
+          "recall_ci95": [
+            0.324,
+            0.49
+          ]
+        }
+      }
+    },
+    "gbt": {
+      "raw": {
+        "red": {
+          "tp": 29,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.9667,
+          "recall": 0.9062,
+          "f1": 0.9355,
+          "tn": 159,
+          "frames_occupied": 32,
+          "precision_ci95": [
+            0.833,
+            0.994
+          ],
+          "recall_ci95": [
+            0.758,
+            0.968
+          ]
+        },
+        "amber": {
+          "tp": 120,
+          "fp": 2,
+          "fn": 11,
+          "precision": 0.9836,
+          "recall": 0.916,
+          "f1": 0.9486,
+          "tn": 59,
+          "frames_occupied": 131,
+          "precision_ci95": [
+            0.942,
+            0.995
+          ],
+          "recall_ci95": [
+            0.856,
+            0.952
+          ]
+        }
+      },
+      "debounced": {
+        "red": {
+          "tp": 24,
+          "fp": 1,
+          "fn": 8,
+          "precision": 0.96,
+          "recall": 0.75,
+          "f1": 0.8421,
+          "tn": 159,
+          "frames_occupied": 32,
+          "precision_ci95": [
+            0.805,
+            0.993
+          ],
+          "recall_ci95": [
+            0.579,
+            0.867
+          ]
+        },
+        "amber": {
+          "tp": 106,
+          "fp": 0,
+          "fn": 25,
+          "precision": 1.0,
+          "recall": 0.8092,
+          "f1": 0.8945,
+          "tn": 61,
+          "frames_occupied": 131,
+          "precision_ci95": [
+            0.965,
+            1.0
+          ],
+          "recall_ci95": [
+            0.733,
+            0.867
+          ]
+        }
+      }
+    }
+  },
+  "ground_error_m": {
+    "median": 0.069,
+    "p90": 0.112,
+    "share_over_0.3m": 0.0
+  },
+  "timing_ms": {
+    "crop_voxel": 18.7,
+    "ground": 22.6,
+    "cluster": 29.0,
+    "classify": 0.0,
+    "total": 70.4
+  },
+  "thresholds": {
+    "rule": 0.5,
+    "gbt": 0.85
+  }
+}

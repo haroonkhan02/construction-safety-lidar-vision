@@ -1,0 +1,142 @@
+{
+  "weights": "models/ppe/yolo11n_ppe.pt",
+  "device": "mps",
+  "test_all": {
+    "mAP50": 0.7133,
+    "mAP50_95": 0.4127,
+    "precision": 0.845,
+    "recall": 0.6459,
+    "per_class": {
+      "Hardhat": {
+        "ap50": 0.888,
+        "ap50_95": 0.5264
+      },
+      "Mask": {
+        "ap50": 0.7753,
+        "ap50_95": 0.5183
+      },
+      "NO-Hardhat": {
+        "ap50": 0.5416,
+        "ap50_95": 0.2587
+      },
+      "NO-Mask": {
+        "ap50": 0.6309,
+        "ap50_95": 0.2518
+      },
+      "NO-Safety Vest": {
+        "ap50": 0.755,
+        "ap50_95": 0.4304
+      },
+      "Person": {
+        "ap50": 0.7955,
+        "ap50_95": 0.4654
+      },
+      "Safety Cone": {
+        "ap50": 0.4572,
+        "ap50_95": 0.1924
+      },
+      "Safety Vest": {
+        "ap50": 0.8385,
+        "ap50_95": 0.5221
+      },
+      "machinery": {
+        "ap50": 0.8239,
+        "ap50_95": 0.5803
+      },
+      "vehicle": {
+        "ap50": 0.6268,
+        "ap50_95": 0.3808
+      }
+    },
+    "plots_dir": "outputs/val_test_all",
+    "images": 82
+  },
+  "test_clean": {
+    "mAP50": 0.6714,
+    "mAP50_95": 0.3842,
+    "precision": 0.844,
+    "recall": 0.6154,
+    "per_class": {
+      "Hardhat": {
+        "ap50": 0.8784,
+        "ap50_95": 0.518
+      },
+      "Mask": {
+        "ap50": 0.629,
+        "ap50_95": 0.4286
+      },
+      "NO-Hardhat": {
+        "ap50": 0.4292,
+        "ap50_95": 0.1708
+      },
+      "NO-Mask": {
+        "ap50": 0.6569,
+        "ap50_95": 0.2459
+      },
+      "NO-Safety Vest": {
+        "ap50": 0.765,
+        "ap50_95": 0.422
+      },
+      "Person": {
+        "ap50": 0.7607,
+        "ap50_95": 0.4245
+      },
+      "Safety Cone": {
+        "ap50": 0.3526,
+        "ap50_95": 0.1515
+      },
+      "Safety Vest": {
+        "ap50": 0.7909,
+        "ap50_95": 0.4766
+      },
+      "machinery": {
+        "ap50": 0.7861,
+        "ap50_95": 0.5451
+      },
+      "vehicle": {
+        "ap50": 0.665,
+        "ap50_95": 0.4588
+      }
+    },
+    "plots_dir": "outputs/val_test_clean",
+    "images": 40
+  },
+  "compliance": {
+    "gt_workers": 174,
+    "pred_workers": 144,
+    "matched": 127,
+    "status": {
+      "hardhat": {
+        "agree": 90,
+        "known_pairs": 111,
+        "agreement": 0.8108
+      },
+      "vest": {
+        "agree": 100,
+        "known_pairs": 118,
+        "agreement": 0.8475
+      }
+    },
+    "violation": {
+      "tp": 60,
+      "fp": 2,
+      "fn": 28,
+      "tn": 86
+    },
+    "gt_orphan_no_ppe_boxes": 4,
+    "gt_violation_workers": 88,
+    "missed_violation_reasons": {
+      "status_unknown": 11,
+      "worker_not_detected": 17
+    },
+    "worker_recall": 0.7299,
+    "worker_precision": 0.8819,
+    "violation_precision": 0.9677,
+    "violation_recall": 0.6818,
+    "conf": 0.35
+  },
+  "latency_ms": {
+    "mps": 7.9,
+    "cpu": 22.5
+  }
+}
